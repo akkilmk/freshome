@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Coupon management</h4> 
+                <a href="addcoupon"><button type="submit" class="btn btn-outline-success mb-4">Add Coupon</button> </a>  
+                <table class="table table-bordered">
+                  <thead>
+                    <tr> 
+                      <th> Coupon code </th>
+                      <th>Coupon Discount </th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  {% if coupon_list %}
+                  {% for i in coupon_list %}
+                  <tbody>
+                    <tr class="table-info">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                      <td>{{i.coupon_code}}</td>
+                      <td>{{i.coupon_discount}}</td>
+                      <input type="hidden" name="remove_coupon" value="{{i.id}}">
+                      <td><button type="submit" style="background-color:rgb(240, 11, 11);color: white;">Remove</button></td>
+                    </form>
+                    </tr>
+                  </tbody> 
+                  {% endfor %}
+                  {% endif %}
+                </table>
+                {% if coupon_list.has_other_pages %}
+                <ul class="pagination">
+                  {% if coupon_list.has_previous %}
+                  <li><a href="?page={{ coupon_list.previous_page_number }}"><button class="border-0">Prev</button></a></li>
+                  {% else %}
+                  <li class="disabled"><span></span></li>
+                  {% endif %}
+                  {% for i in coupon_list.paginator.page_range %}
+                  {% if coupon_list.number == i %}
+                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                  {% if coupon_list.has_next %}
+                  <li><a href="?page={{ coupon_list.next_page_number }}"><button class="border -0">Next</button></a></li>
+                  {% else %}
+                  <li class="disabled"><span></span></li>
+                  {% endif %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock content %}

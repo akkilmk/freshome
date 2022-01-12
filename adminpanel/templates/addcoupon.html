@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .hscroll{
+    overflow-x: auto;
+  }
+</style>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 stretch-card">
+            <div class="hscroll">
+              <div class="card-body">
+                <h4 class="card-title">Add Coupon       </h4>
+                <!-- <p class="card-description"> Add class <code>.table-{color}</code> -->
+                </p>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th> # </th>
+                      <th> Coupon code </th>
+                      <th>Coupon Discount</th>
+                      <th> Action </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <div class="row">
+                          <div class="col-12">
+                    <tr class="table-info">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                      <td> 1 </td>
+                      <td> <input type="text" style="width: 8rem; height: 2rem; border-width: 2px;" name="coupon_code" value=""></td>
+                      <td> <input type="text" style="width: 5rem; height: 2rem; border-width: 2px;" value="" name="coupon_discount" >  % (in percentage)</td>
+                      <td><button type="submit" style="background-color:rgb(0, 158, 34);color: white;">Add Coupon</button></td>
+                    </form>
+                    </tr>
+                </div>
+                </div>
+                  </tbody> 
+                </table>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock content %}

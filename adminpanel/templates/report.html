@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .hscroll{
+        overflow-x: auto;
+    }
+</style>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+
+                </ol>
+            </nav>
+        </div>
+        <h4>Sales report</h4>
+        <div class="row">
+            
+            <br>    
+            <form method="post">
+                {% csrf_token %}
+                <h4 style="margin-left: 40%; margin-bottom: 5%;">Date wise Report</h4>
+                <div class="col-6 col-md-6 col-lg-12 d-flex">   
+                    
+                    <div class="input-group date" data-target-input="nearest">
+                        <p style="margin-right: 1rem;">Start Date : </p>
+                        <input autocomplete="off" type="text" id="datetimepicker1"
+                            class="form-control datetimepicker-input" name="date1" />
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <div class="input-group date" data-target-input="nearest">
+                        <p style="margin-right: 1rem;margin-left: 2rem;">End Date : </p>
+                        <input autocomplete="off" type="text" id="datetimepicker2"
+                            class="form-control datetimepicker-input" name="date2" />
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary ml-2">Report</button>
+                </div>
+
+
+                <div class="row">
+                    <h4 style="margin-left: 40%; margin-bottom: 2%; margin-top: 2%;">Month wise Report</h4>
+                <div class="col-6 col-md-6 col-lg-6 d-flex">  
+                <div class="input-group date" data-target-input="nearest">
+                    <p style="margin-right: 1rem;">Month : </p>
+                    <input autocomplete="off" type="text" id="datetimepicker3"
+                        class="form-control datetimepicker-input" name="month" />
+                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary ml-2">Report</button>
+                </div>
+            </form>
+
+            {% if reportshow != 1 %}
+            <div class="col-lg-12 grid-margin stretch-card mt-4 ">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-end">
+                        <button type="button" onclick="pdfgen()" class="btn btn-outline-primary ">Generate Pdf</button>
+                        </div>
+                        <div id="salesreport">
+                        <h4 class="card-title">Sales Report</h4> 
+                            {%if date %}
+                            {{date}}
+                            {% endif %}
+                            {% if totalsum %}
+                            <br>
+                            <h6>Total sum : {{totalsum.price__sum}}</h6>
+                            {% endif %}
+                            <div class="hscroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> Product Name </th>
+                                        <th>Price</th>
+                                        <th>Offer price</th>
+                                        <th> Quantity </th>
+                                        <th> Total </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% if salesreport %}
+                                    {% for i in salesreport %}
+
+                                    <tr>
+                                        <td> {{i.products_id__product_name}} </td>
+                                        <td>{{i.products_id__product_price}}</td>
+                                        <td>{{i.products_id__offer_price}}</td>
+                                        <td> {{i.qty}} </td>
+                                        <td> {{i.sum_price}} </td>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+            <script>
+                function pdfgen() {
+                    const element = document.getElementById('salesreport')
+                    html2pdf()
+                        .from(element)
+                        .save()
+                }
+            </script>
+
+                <script>
+
+                    $(document).ready(function () {
+                        $("#datetimepicker1").datepicker({
+                            format: 'YYYY-MM-DD',
+                        });
+                    });
+
+                </script>
+
+                <script>
+
+                    $(document).ready(function () {
+                        $("#datetimepicker2").datepicker({
+                            format: 'YYYY-MM-DD',
+                        });
+                    });
+
+
+                </script>
+
+
+                <script>
+
+                    $(document).ready(function () {
+                        $("#datetimepicker3").datepicker({
+                            format: 'YYYY-MM',
+                        });
+                    });
+
+
+                </script>
+
+
+            {% endblock content %}

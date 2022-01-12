@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+
+      <div class="row">
+          <div class="container">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-3 text-gray-800">Order Details</h1>
+                    <!-- DataTales Example -->  
+                    <div class="card shadow mb-4">
+                        <!-- <div class="hscroll"> -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  {% if order_details %}
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <td>{{order_details.id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <td>{{order_details.user.firstname}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Order Date</th>
+                                            <td>{{order_details.date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Mode</th>
+                                            <td>{{order_details.payment_mode}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Products</th>
+                                            <td>
+                                                {% for i in product_list %}
+                                                    {{i.products.product_name}} X {{i.quantity}} <br>
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Amount</th>
+                                            <td>&#8377;{{order_details.total}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping Address</th>
+                                            <td>
+                                                {{order_details.address.user_name}},<br>
+                                                {{order_details.address.address}}, <br>{{order_details.address.city}}, {{order_details.address.state}} {{order_details.address.zip_code}}.
+                                               <br> Mobile: {{order_details.address.phone}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Order Status</th>
+                                            <td>{{order_details.status}}</td>
+                                        </tr>
+                                    </thead>
+                                    {% endif %}
+                                    <tbody>
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            <th>Action</th> 
+                                            <td>
+                                                {% if order_details.status == 'Rejected' %}
+                                                <button type="submit" disabled name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</button>
+                                                <button type="submit" disabled name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</button>
+                                                <button type="submit" name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</button>
+                                                {% elif order_details.status == 'customer cancelled' %}
+                                                <button type="submit" disabled name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</button>
+                                                <button type="submit" disabled name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</button>
+                                                <button type="submit" disabled name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</button>
+                                                {% elif order_details.status == 'Delivered' %}
+                                                <button type="submit" disabled name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</button>
+                                                <button type="submit" name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</button>
+                                                <button type="submit" disabled name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</button>
+                                                {% elif order_details.status == 'Dispatched' %}
+                                                <button type="submit" name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</button>
+                                                <button type="submit" name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</button>
+                                                <button type="submit" name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</button>
+                                                {% else %}
+                                                <button type="submit" name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</button>
+                                                <button type="submit" name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</button>
+                                                <button type="submit" name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</button>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </form>
+                                </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /.container-fluid -->
+
+                 </div>
+            <!-- End of Main Content -->
+
+{% endblock content %}

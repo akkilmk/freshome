@@ -1,0 +1,709 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Purple Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+	<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
+	<script src="https://unpkg.com/dropzone"></script>
+	<script src="https://unpkg.com/cropperjs"></script>
+</head>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:partials/_navbar.html -->
+		<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+			<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+			</div>
+			<div class="navbar-menu-wrapper d-flex align-items-stretch">
+				<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+					<span class="mdi mdi-menu"></span>
+				</button>
+				<div class="search-field d-none d-md-block">
+					<form class="d-flex align-items-center h-100" action="#">
+						<div class="input-group">
+							<div class="input-group-prepend bg-transparent">
+								<i class="input-group-text border-0 mdi mdi-magnify"></i>
+							</div>
+							<input type="text" class="form-control bg-transparent border-0"
+								placeholder="Search projects">
+						</div>
+					</form>
+				</div>
+				<ul class="navbar-nav navbar-nav-right">
+
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+						aria-labelledby="messageDropdown">
+
+						<div class="preview-thumbnail">
+							<img src="{% static 'assets/images/faces/face4.jpg' %}" alt="image" class="profile-pic">
+						</div>
+						<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+							<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
+							<p class="text-gray mb-0"> 1 Minutes ago </p>
+						</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<img src="{% static 'assets/images/faces/face2.jpg' %}" alt="image" class="profile-pic">
+							</div>
+							<div
+								class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message
+								</h6>
+								<p class="text-gray mb-0"> 15 Minutes ago </p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<img src="{% static 'assets/images/faces/face3.jpg' %}" alt="image" class="profile-pic">
+							</div>
+							<div
+								class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated
+								</h6>
+								<p class="text-gray mb-0"> 18 Minutes ago </p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<h6 class="p-3 mb-0 text-center">4 new messages</h6>
+					</div>
+					</li>
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+						aria-labelledby="notificationDropdown">
+						<h6 class="p-3 mb-0">Notifications</h6>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-success">
+									<i class="mdi mdi-calendar"></i>
+								</div>
+							</div>
+
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-warning">
+									<i class="mdi mdi-settings"></i>
+								</div>
+							</div>
+							<div
+								class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+								<p class="text-gray ellipsis mb-0"> Update dashboard </p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-info">
+									<i class="mdi mdi-link-variant"></i>
+								</div>
+							</div>
+							<div
+								class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+								<p class="text-gray ellipsis mb-0"> New admin wow! </p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<h6 class="p-3 mb-0 text-center">See all notifications</h6>
+					</div>
+					</li>
+					<li class="nav-item nav-logout d-none d-lg-block">
+						<a class="nav-link" href="adminlogout">
+							<i class="mdi mdi-power"></i>
+						</a>
+					</li>
+					<li class="nav-item nav-settings d-none d-lg-block">
+						<a class="nav-link" href="#">
+							<i class="mdi mdi-format-line-spacing"></i>
+						</a>
+					</li>
+				</ul>
+				<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+					data-toggle="offcanvas">
+					<span class="mdi mdi-menu"></span>
+				</button>
+			</div>
+		</nav>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper ">
+			<!-- partial:partials/_sidebar.html -->
+			<nav class="sidebar sidebar-offcanvas" id="sidebar">
+				<ul class="nav">
+					<li class="nav-item nav-profile">
+						<a href="#" class="nav-link">
+							<div class="nav-profile-image">
+								<img src="{% static 'assets/images/faces/admin2.jpg' %}" alt="profile">
+								<span class="login-status online"></span>
+								<!--change to offline or busy as needed-->
+							</div>
+							<div class="nav-profile-text d-flex flex-column">
+								<span class="font-weight-bold mb-2">Akhil</span>
+								<span class="text-secondary text-small">Super Admin</span>
+							</div>
+							<i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/">
+							<span class="menu-title">Dashboard</span>
+							<i class="mdi mdi-home menu-icon"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+							aria-controls="ui-basic">
+							<span class="menu-title">Products</span>
+							<i class="menu-arrow"></i>
+							<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+						</a>
+						<div class="collapse" id="ui-basic">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"> <a class="nav-link" href="allproducts">All products</a></li>
+								<li class="nav-item"> <a class="nav-link" href="addproduct">Add products</a></li>
+								<li class="nav-item"> <a class="nav-link" href="../../admin/productoffer">product
+										offer</a></li>
+								<li class="nav-item"> <a class="nav-link" href="categories">categories</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="userslist">
+							<span class="menu-title">Users</span>
+							<i class="mdi mdi-contacts menu-icon"></i>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="order">
+							<span class="menu-title">Order management</span>
+							<i class="mdi mdi-table-large menu-icon"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="offer">
+							<span class="menu-title">Offer management</span>
+							<i class="mdi mdi-table-large menu-icon"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="coupon">
+							<span class="menu-title">Coupon management</span>
+							<i class="mdi mdi-table-large menu-icon"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="salesreport">
+							<span class="menu-title">Sales report</span>
+							<i class="mdi mdi-table-large menu-icon"></i>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+
+
+			<style>
+				body {
+					font-family: 'Lato', sans-serif
+				}
+
+				h1 {
+					margin-bottom: 40px
+				}
+
+				label {
+					color: #333
+				}
+
+				.btn-send {
+					font-weight: 300;
+					text-transform: uppercase;
+					letter-spacing: 0.2em;
+					width: 80%;
+					margin-left: 3px
+				}
+
+				.help-block.with-errors {
+					color: #ff5050;
+					margin-top: 5px
+				}
+
+				.card {
+					margin-left: 10px;
+					margin-right: 10px
+				}
+
+				.card-body {
+					background-color: #88e6d8;
+				}
+			</style>
+			</head>
+			<body>
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="page-header">
+
+							<div class="row">
+
+								<form id="productForm" action="" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="container">
+										<div class=" text-center">
+											<h3>Edit products</h3>
+										</div>
+										<div class="row ">
+											<div class="col-lg-7 mx-auto">
+												<div class="card mt-2 mx-auto p-4 bg-light">
+													<div class="card-body">
+														<div class="container">
+															<div class="controls">
+																<div class="row">
+																	<div class="col-md-6">
+																		<div class="form-group"> <label
+																				for="form_name">Product name</label>
+																			<input id="product_name" value="{{product.product_name}}"  type="text"
+																				name="productname" class="form-control"
+																				placeholder="Product name">
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<div class="form-group"> <label
+																				for="form_lastname">price</label>
+																			<input id="product_price" value="{{product.product_price}}" type="text"
+																				name="price" class="form-control"
+																				placeholder="Product price">
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-6">
+																		<div class="form-group">
+																			<label for="form_email">Stock</label>
+																			<input id="stock" type="text" value="{{product.product_stock}}" name="stock"
+																				class="form-control"
+																				placeholder="Product stock">
+																		</div>
+																	</div>
+                                  <div class="col-md-6">
+                                    <div class="form-group"> <label for="form_need">category*</label> 
+                                      <select id="form_need" name="cate" class="form-control" required="required" >
+                                            <option value="" disabled>Categories</option>
+                                            {% if categ %}
+                                            {% for i in categ %}
+                                            <option value="{{i.id}}" {% if i.id == product.category.id %} selected {% endif %}  >{{i.category_name}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select> 
+                                      </div>
+                                  </div>
+                            </div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label for="form_message">Product
+																				description </label>
+                                        
+																			<textarea id="form_message"
+																				name="product_description"
+																				class="form-control"
+																				placeholder="product description"
+																				rows="4"
+																				data-error="Please, leave us a message.">{{product.product_description}}</textarea>
+																		</div>
+																	</div>
+																</div>
+																<img id="output" />
+																<div class="row images_preview"></div>
+																<div class="row">
+																	<div class="col-md-6 pb-2 ">
+																		<input type="file" class="btn-outline-success"
+																			id="image1" name="image1"
+																			class="fileupload image">
+																		<input type="file" class="btn-outline-success"
+																			id="image2" name="image2"
+																			class="fileupload image">
+																		<input type="file" class="btn-outline-success"
+																			id="image3" name="image3"
+																			class="fileupload image">
+																		
+																	</div>
+																</div>
+															</div>
+                              <input type="hidden" value="{{product.id}}" name="id">
+															<div class="row ">
+																<div class="col-md-12">
+																	<button type="submit"
+																		class="btn btn-success btn-send pt-2 btn-block "
+																		onclick="return validateProductForm()">
+																		Add Product
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div> <!-- /.8 -->
+												</div> <!-- /.row-->
+											</div>
+										</div>
+								</form>
+
+
+								<!-- image cropping -->
+
+								<style type="text/css">
+									img {
+										display: block;
+										max-width: 100% !important;
+									}
+
+									.preview {
+										overflow: hidden;
+										width: 160px;
+										height: 160px;
+										margin: 10px;
+										border: 1px solid red;
+									}
+								</style>
+
+
+								<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+									aria-labelledby="modalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-md" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="modalLabel">Crop image</h5>
+												<button type="button" class="close" data-bs-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="img-container">
+													<div class="row">
+														<div class="col-md-8">
+															<!--  default image where we will set the src via jquery-->
+															<img id="img_image1">
+															<img id="img_image2">
+															<img id="img_image3">
+														</div>
+														<div class="col-md-4">
+															<div class="preview"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-primary" id="crop">Crop</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<!-- image croppin -->
+
+
+					</div>
+					<!-- main-panel ends -->
+				</div>
+				<!-- page-body-wrapper ends -->
+		</div>
+
+
+
+
+
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<!-- <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script> -->
+		<!-- endinject -->
+		<!-- Plugin js for this page -->
+		<!-- <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script> -->
+		<!-- End plugin js for this page -->
+		<!-- inject:js -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+			integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="{% static 'assets/js/off-canvas.js' %}"></script>
+		<script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+		<script src="{% static 'assets/js/misc.js' %}"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page -->
+		<script src="{% static 'assets/js/dashboard.js' %}"></script>
+		<script src="{% static 'assets/js/todolist.js' %}"></script>
+
+
+
+
+		<script>
+
+			$(document).ready(function () {
+				validateProductForm()
+			})
+
+			$.validator.addMethod("numbersonly", function (value, element) {
+				return this.optional(element) || /^[0-9]+$/i.test(value);
+			}, "Digits only please");
+
+			var bs_modal = $('#modal');
+			var image1 = document.getElementById('img_image1');
+			var image2 = document.getElementById('img_image2');
+			var image3 = document.getElementById('img_image3');
+			var cropper, reader, file;
+
+			function deleteAll() {
+				$('#img_image1').attr("src", "");
+				$('#img_image2').attr("src", "");
+				$('#img_image3').attr("src", "");
+			}
+			$("body").on("change", "#image1", function (e) {
+				var files = e.target.files;
+				var done = function (url) {
+					deleteAll()
+					image1.src = url;
+					bs_modal.modal('show');
+					showCropper(image1)
+				};
+
+
+				if (files && files.length > 0) {
+					file = files[0];
+					let fileType = file['type'];
+					var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+					if ($.inArray(fileType, validImageTypes) < 0) {
+						alertify.error("Upload valid image")
+						$(this).val('')
+						return false;
+					}
+
+					if (URL) {
+						done(URL.createObjectURL(file));
+					} else if (FileReader) {
+						reader = new FileReader();
+						reader.onload = function (e) {
+							done(reader.result);
+						};
+						reader.readAsDataURL(file);
+					}
+				}
+			});
+
+
+			$("body").on("change", "#image2", function (e) {
+				var files = e.target.files;
+				var done = function (url) {
+					deleteAll()
+					image2.src = url;
+					bs_modal.modal('show');
+					showCropper(image2)
+				};
+
+
+				if (files && files.length > 0) {
+					file = files[0];
+
+					let fileType = file['type'];
+					var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+					if ($.inArray(fileType, validImageTypes) < 0) {
+						alertify.error("Upload valid image")
+						$(this).val('')
+						return false;
+					}
+
+					if (URL) {
+						done(URL.createObjectURL(file));
+					} else if (FileReader) {
+						reader = new FileReader();
+						reader.onload = function (e) {
+							done(reader.result);
+						};
+						reader.readAsDataURL(file);
+					}
+				}
+			});
+
+			$("body").on("change", "#image3", function (e) {
+				var files = e.target.files;
+				var done = function (url) {
+					deleteAll()
+					image3.src = url;
+					bs_modal.modal('show');
+					showCropper(image3)
+				};
+
+
+				if (files && files.length > 0) {
+					file = files[0];
+
+					let fileType = file['type'];
+					var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+					if ($.inArray(fileType, validImageTypes) < 0) {
+						alertify.error("Upload valid image")
+						$(this).val('')
+						return false;
+					}
+
+					if (URL) {
+						done(URL.createObjectURL(file));
+					} else if (FileReader) {
+						reader = new FileReader();
+						reader.onload = function (e) {
+							done(reader.result);
+						};
+						reader.readAsDataURL(file);
+					}
+				}
+			});
+
+
+
+			function showCropper(cropImg) {
+				cropper = new Cropper(cropImg, {
+					aspectRatio: 5 / 6,
+					viewMode: 3,
+					preview: '.preview'
+				});
+			}
+
+
+			bs_modal.on('hidden.bs.modal', function () {
+				cropper.destroy();
+				cropper = null;
+			});
+
+			$("#crop").click(function () {
+				canvas = cropper.getCroppedCanvas({
+					width: 500,
+					height: 500,
+				});
+
+				canvas.toBlob(function (blob) {
+					url = URL.createObjectURL(blob);
+					var reader = new FileReader();
+					reader.readAsDataURL(blob);
+					reader.onloadend = function () {
+						var base64data = reader.result;
+						let clength = $('.cropped_image').length + 1
+						$('.images_preview').append(`
+            <div class="col-md-4">
+            <input class="cropped_image" name="cropped_image${clength}" type="hidden" value="${base64data}">
+            <img src="${base64data}" >
+            </div>
+            `)
+						bs_modal.modal('hide');
+					};
+				});
+			});
+
+		</script>
+
+
+
+
+		<script>
+			var loadFile = function (event) {
+				var output = document.getElementById('output');
+				output.src = URL.createObjectURL(event.target.files[0]);
+				output.onload = function () {
+					URL.revokeObjectURL(output.src) // free memory
+				}
+			};
+		</script>
+
+		<script>
+			$(".fileupload").change(function (e) {
+				var val = $(this).val();
+				if (val.match(/(?:jpeg|jpg|png)$/)) {
+					alert("Please chose image format");
+				}
+			});
+			var loadFile = function (event) {
+				var output = document.getElementById('output');
+				output.src = URL.createObjectURL(event.target.files[0]);
+				output.onload = function () {
+					URL.revokeObjectURL(output.src) // free memory
+				}
+			};
+		</script>
+		<script>
+
+			function validateProductForm() {
+				const valid = $('#productForm').validate({
+					rules: {
+						stock: {
+							required: true,
+							numbersonly: true
+						},
+
+						cat: {
+							required: true
+						},
+
+						product_description: {
+							required: true,
+							minlength: 5
+						},
+
+						productname: {
+							required: true,
+							minlength: 5
+						},
+
+						price: {
+							required: true,
+							numbersonly: true
+						},
+					},
+					errorElement: 'span',
+					errorPlacement: function (error, element) {
+						error.addClass('invalid-feedback');
+						element.closest('.form-group').append(error);
+					},
+					highlight: function (element, errorClass, validClass) {
+						$(element).addClass('is-invalid');
+					},
+					unhighlight: function (element, errorClass, validClass) {
+						$(element).removeClass('is-invalid');
+					}
+				});
+				return valid;
+			}
+		</script>
+
+
+		<!-- End custom js for this page -->
+</body>
+
+</html>
