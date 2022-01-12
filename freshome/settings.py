@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'freshome.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'freshome',
-        'USER': 'akhil',
-        'PASSWORD': 'akhil123',
-        'HOST': 'localhost', 
+        'NAME': 'freshome1project',
+        'USER': 'freshome1project',
+        'PASSWORD': 'akhilmk125',
+        'HOST': 'freshome1project.c6x8rzkwfazz.ap-south-1.rds.amazonaws.com', 
         'PORT': '3306',
         
     }
