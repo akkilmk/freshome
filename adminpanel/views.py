@@ -277,10 +277,8 @@ def allproducts(request):
 
 @login_required(login_url='adminlogin.html')
 def category(request):
-
     cat = Category.objects.all()
     no = Category.objects.all().count()
-    print(no)
     lists=[]
     for i in range(1,no+1):
         print(i)
