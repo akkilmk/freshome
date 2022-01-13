@@ -428,11 +428,11 @@ def checkout(request):
 
 
 def buynow(request):
+    id = request.GET.get('id')
     if 'usermail' not in request.session:
         messages.info(request,'sorry you must login first')
         return redirect(accviews.userlogin)
     else:
-        id = request.GET.get('id')
         useremail = request.session['usermail'] 
         user_email =Account.objects.get(email = useremail)
         user_id=user_email.id
