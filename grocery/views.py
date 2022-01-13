@@ -440,25 +440,29 @@ def buynow(request):
         productdec = products.objects.get(id = id)
         if request.method =='POST':
             address = request.POST.get('active_add')
-            cod = request.POST.get('payment')
-            orders = order()
-            orders.user_id = user_id
-            orders.address_id = address
-            orders.total = productdec.offer_price
-            orders.payment_mode =cod
-            orders.save()
-            last_id = order.objects.filter(user_id = user_id).latest('id')
-            order_items = orderitems()
-            order_items.order_id = last_id.id
-            order_items.products_id = productdec.id
-            order_items.quantity = 1
-            order_items.price = productdec.offer_price
-            order_items.save()
-            cartsum = productdec.offer_price
-            mycart_count = mycart.objects.filter(user_id = user_id).count()
-            order_id = order.objects.filter(user_id = user_id).latest('id')
-            order_details = orderitems.objects.filter(order_id = order_id)
-            return render(request,'success.html',{'order_details':order_details,'buynowtotal':cartsum,'user_name':user_name,'mycart_count':mycart_count})
+            if address is None:
+                messages.info(request,'please fill the Address form')
+                return redirect(buynow)
+            else:
+                cod = request.POST.get('payment')
+                orders = order()
+                orders.user_id = user_id
+                orders.address_id = address
+                orders.total = productdec.offer_price
+                orders.payment_mode =cod
+                orders.save()
+                last_id = order.objects.filter(user_id = user_id).latest('id')
+                order_items = orderitems()
+                order_items.order_id = last_id.id
+                order_items.products_id = productdec.id
+                order_items.quantity = 1
+                order_items.price = productdec.offer_price
+                order_items.save()
+                cartsum = productdec.offer_price
+                mycart_count = mycart.objects.filter(user_id = user_id).count()
+                order_id = order.objects.filter(user_id = user_id).latest('id')
+                order_details = orderitems.objects.filter(order_id = order_id)
+                return render(request,'success.html',{'order_details':order_details,'buynowtotal':cartsum,'user_name':user_name,'mycart_count':mycart_count})
         address = Address.objects.filter(user_id = user_id)
         coupon_lists =  coupon_list()
         coupon_lists.grand_total = productdec.offer_price
