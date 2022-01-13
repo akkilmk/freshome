@@ -58,11 +58,11 @@ def monthReport(request):
     today = datetime.date.today()
     current_month = today.month
     current_year = today.year
-    return order.objects.filter(date__year=current_year, date__month=current_month).aggregate(Sum('total'))
+    return order.objects.filter(date__year=current_year, date__month=current_month,status='Delivered').aggregate(Sum('total'))
 def yearReport(request):
     today = datetime.date.today()
     current_year = today.year
-    return order.objects.filter(date__year=current_year).aggregate(Sum('total'))  
+    return order.objects.filter(date__year=current_year,status='Delivered').aggregate(Sum('total'))  
 def pendingorders(request):
     orders = order.objects.filter(status='placed').count()
     return orders
