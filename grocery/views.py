@@ -442,7 +442,7 @@ def buynow(request):
             address = request.POST.get('active_add')
             if address is None:
                 messages.info(request,'please fill the Address form')
-                return redirect(buynow)
+                return redirect('/buynow?id='+id)
             else:
                 cod = request.POST.get('payment')
                 orders = order()
