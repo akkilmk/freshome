@@ -48,7 +48,6 @@ def adminhome(request):
         password = request.POST.get('password')
 
         user = auth.authenticate(email= adminmail,password = password)
-        print(user)
    
 
         if user is not None:
@@ -281,9 +280,7 @@ def category(request):
     no = Category.objects.all().count()
     lists=[]
     for i in range(1,no+1):
-        print(i)
         lists.append(i)
-        print(lists)
         
     return render(request,'categories.html',{'cate':cat,'no':lists})
 

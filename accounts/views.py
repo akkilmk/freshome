@@ -131,7 +131,6 @@ def updateuser(request):
         return redirect(userlogin)
     else:
         useremail = request.session['usermail']
-        print(useremail)
         useracc = Account.objects.get(email =useremail)
 
         if request.method =='POST':
@@ -149,7 +148,6 @@ def changepass(request):
         if request.method =="POST":
             useremail = request.session['usermail']
             current_password = request.POST.get('currentpass')
-            print(current_password)
             newpass1 = request.POST.get('pass1')
             newpass2 = request.POST.get('pass2')
             if newpass1 == newpass2 :
@@ -183,8 +181,6 @@ def addaddress(request):
             if fromcheckout == '1':
                 return redirect(groview.checkout)
             elif fromcheckout == '0':
-                print(frombuynow)
-                print('not working')
                 return redirect('/buynow?id='+frombuynow)
             else:
                 return redirect(profile)

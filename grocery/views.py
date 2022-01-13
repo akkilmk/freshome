@@ -105,7 +105,6 @@ def addtocart(request,id):
             if my_cart_id:
                 return JsonResponse({ 'status' : 'fail'})
             else:
-                print('is working')
                 mycart(products_id = id,guest_user = guest_user,quantity = 1, total = products_price).save()
                 count = mycart.objects.filter(guest_user = guest_user).count()
                 return JsonResponse({ 'status' : 'success','count':count})
