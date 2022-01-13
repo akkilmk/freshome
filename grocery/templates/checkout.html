@@ -7,14 +7,7 @@
 
 <head>
     <title>Freshome</title>
-    {% if messages %}
-    {%for messages in messages %}
-    <script>
-        alertify.error('{{messages}}')
-    </script>
-    {% endfor %} 
-    {% endif %}
-
+   
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,6 +36,14 @@
 
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
+
+        {% if messages %}
+        {%for messages in messages %}
+        <script>
+            alertity.error('{{messages}}')
+        </script>
+        {% endfor %} 
+        {% endif %}
 </head>
 
 <body>
