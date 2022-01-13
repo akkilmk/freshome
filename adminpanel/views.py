@@ -30,7 +30,7 @@ def adminlogin(request):
         yearReports = yearReport(request)
         pendingorder = pendingorders(request)
         deliveredorder = deliveredorders(request)
-        report_month = order.objects.values('date__month','date__day','date__year').filter(status='Delivered').annotate(Sum('total')).order_by('date__month')[:7]
+        report_month = order.objects.values('date__month','date__day','date__year').filter(status='Delivered').annotate(Sum('total')).order_by('date__date')[:7]
         report_date = order.objects.values('date__month','date__day','date__year').filter(status='Delivered').annotate(Sum('total')).order_by('date__date')[:7]
         payment_mode = order.objects.values('payment_mode').filter(status='Delivered').annotate(Sum('total')).all()
         order_status = order.objects.values('status').annotate(Count('status'))
