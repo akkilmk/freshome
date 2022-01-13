@@ -27,14 +27,14 @@ def home(request):
         user_name=user_email.firstname
         user_id = user_email.id
         mycart_count = mycart.objects.filter(user_id = user_id).count()
-        productfruits = products.objects.filter(category_id = 1).all()[:6]
-        productveg = products.objects.filter(category_id = 2).all()[:6]
-        fish = products.objects.filter(category_id = 3).all()[:6] 
+        productfruits = products.objects.filter(category_id = 7).all()[:6]
+        productveg = products.objects.filter(category_id = 8).all()[:6]
+        fish = products.objects.filter(category_id = 9).all()[:6] 
         return render(request,'index.html',{'fruits':productfruits,'vegetables':productveg ,'fish':fish,'user_name':user_name,'mycart_count':mycart_count })
 
-    productfruits = products.objects.filter(category_id = 1).all()[:6]
-    productveg = products.objects.filter(category_id = 2).all()[:6]
-    fish = products.objects.filter(category_id = 3).all()[:6]
+    productfruits = products.objects.filter(category_id = 7).all()[:6]
+    productveg = products.objects.filter(category_id = 8).all()[:6]
+    fish = products.objects.filter(category_id = 9).all()[:6]
     return render(request,'index.html',{'fruits':productfruits,'vegetables':productveg ,'fish':fish })
 
 
@@ -539,7 +539,7 @@ def applycoupon(request):
 
 
 def full_veg(request):
-    productveg = products.objects.filter(category_id = 2).all()
+    productveg = products.objects.filter(category_id = 8).all()
     if 'usermail' in request.session:
         useremail = request.session['usermail']
         user_email =Account.objects.get(email = useremail)
@@ -548,7 +548,7 @@ def full_veg(request):
     else:
         return render(request,'full_veg.html',{'veg':productveg})
 def full_fruit(request):
-    productfruits = products.objects.filter(category_id = 1).all()
+    productfruits = products.objects.filter(category_id = 7).all()
     if 'usermail' in request.session:
         useremail = request.session['usermail']
         user_email =Account.objects.get(email = useremail)
@@ -557,7 +557,7 @@ def full_fruit(request):
     else:
         return render(request,'full_fruits.html',{'full_fruits':productfruits})
 def full_fish(request):
-    fish = products.objects.filter(category_id = 3).all()
+    fish = products.objects.filter(category_id = 9).all()
     if 'usermail' in request.session:
         useremail = request.session['usermail']
         user_email =Account.objects.get(email = useremail)
