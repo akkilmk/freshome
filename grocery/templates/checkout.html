@@ -28,14 +28,18 @@
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <link rel="stylesheet" href="{% static 'assets/vendor/animate.css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/hs-megamenu/src/hs.megamenu.css' %}">
-    <link rel="stylesheet"
-        href="{% static 'ssets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'ssets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/fancybox/jquery.fancybox.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/slick-carousel/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
 
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
+
+        
+</head>
+
+<body>
 
         {% if messages %}
         {%for messages in messages %}
@@ -44,10 +48,6 @@
         </script>
         {% endfor %} 
         {% endif %}
-</head>
-
-<body>
-
     <!-- ========== HEADER ========== -->
     <header id="header" class="u-header u-header-left-aligned-nav">
         <div class="u-header__section">
