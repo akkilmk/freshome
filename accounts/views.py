@@ -237,8 +237,10 @@ def phone_verification(request):
         phonenum = request.POST.get('phone')
         user_valid = Account.objects.filter(phone = phonenum)
         if user_valid:
-            messages.success(request,'Invalid phone number'+phonenum)
-            return render(request, 'forgot.html')
+            phone = '+91'+request.POST.get('phone')
+            request.session['phone_number'] = phonenum
+            twilio_client.verifications(phone, 'sms')
+            return redirect(token_validation)
         else:
             messages.success(request,'Invalid phone number')
             return render(request, 'forgot.html')
