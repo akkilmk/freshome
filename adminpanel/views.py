@@ -218,20 +218,6 @@ def editproduct(request):
             ext = format.split('/')[-1]
             product_image1 = ContentFile(base64.b64decode(img1), name= product_name + '1.' + ext)
             product.product_img_1 = product_image1
-        
-        if len(request.FILES) != 0:
-            os.remove(product.product_img_2.path)
-            format, img2 = images2.split(';base64,')
-            ext = format.split('/')[-1]
-            product_image2 = ContentFile(base64.b64decode(img2), name= product_name + '2.' + ext)
-            product.product_img_2 = product_image2
-        
-        if len(request.FILES) != 0:
-            os.remove(product.product_img_3.path)
-            format, img3 = images3.split(';base64,')
-            ext = format.split('/')[-1]
-            product_image3 = ContentFile(base64.b64decode(img3), name= product_name + '3.' + ext)
-            product.product_img_3 = product_image3
         product.save()
         return redirect(allproducts)
 
