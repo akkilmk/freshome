@@ -235,11 +235,12 @@ def deleteadd(request):
 def phone_verification(request):
     if request.method == 'POST':
         phonenum = request.POST.get('phone')
+        print(phonenum)
         user_valid = Account.objects.filter(phone = phonenum)
         if user_valid:
             phone = '+91'+request.POST.get('phone')
             request.session['phone_number'] = phonenum
-            verification = twilio_client.verifications(phone, 'sms')
+            twilio_client.verifications(phone, 'sms')
             return redirect(token_validation)
         else:
             messages.success(request,'Invalid phone number')
