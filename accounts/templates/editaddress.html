@@ -31,7 +31,9 @@
   margin-top: 50px ;
 }
 </style>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- ************** -->
 
@@ -55,20 +57,20 @@
             <h4 style="color: #495057 ;">Update Address</h4>
           </div>
           
-          <form class="mb-0" method="post">
+          <form class="mb-0" id="addressForm" method="post">
 
             {% csrf_token %}
             {% if useraddress %}
          
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example1" name="name" value="{{useraddress.user_name}}"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example1">Name</label>
                 </div>
               </div>
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example2" name="city" value="{{useraddress.city}}"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example2">City</label>
                 </div>
@@ -76,13 +78,13 @@
             </div>
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example3" name="phone" value="{{useraddress.phone}}" class="form-control input-custom" />
                   <label class="form-label"  for="form9Example3">phone</label>
                 </div>
               </div>
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example4" name="zipcode" value="{{useraddress.zip_code}}" class="form-control input-custom" />
                   <label class="form-label"  for="form9Example4">Zip</label>
                 </div>
@@ -90,22 +92,16 @@
             </div>
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example6" name="address" value="{{useraddress.address}}"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example6">Address</label>
                 </div>
               </div>
-              <!-- <div class="col">
-                <div class="form-outline">
-                  <input type="email" id="typeEmail" class="form-control input-custom" />
-                  <label class="form-label" for="typeEmail">Email</label>
-                </div>
-              </div> -->
             </div>
   
             <div class="float-end ">
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-rounded"
+              <button type="submit" class="btn btn-primary btn-rounded" onclick="return validateaddressForm()"
                 style="background-color: #0062CC ;">Update</button>
             </div>
      
@@ -117,5 +113,66 @@
   </div>
 
 <!-- ************** -->
+
+
+<script>
+
+  $(document).ready(function () {
+      validateaddressForm()
+              })
+
+  function validateaddressForm() {
+      const valid = $('#addressForm').validate({
+          rules: {
+              name: {
+                  required: true,
+                  minlength:3
+              },
+
+              city: {
+                  required: true,
+                  minlength:5
+              },
+
+              phone: {
+                  required: true,
+                  numbersonly:true,
+                  minlength: 10,
+                  maxlength:10,
+                  
+              },
+
+              zipcode: {
+                  required: true,
+                  numbersonly: true,
+                  minlength: 6,
+                  
+              },
+
+              address: {
+                  required: true,
+                  minlength:10
+              },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+              error.addClass('invalid-feedback');
+              element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+              $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+              $(element).removeClass('is-invalid');
+          }
+      });
+      return valid;
+  }
+
+  $.validator.addMethod("numbersonly", function (value, element) {
+      return this.optional(element) || /^[0-9]+$/i.test(value);
+  }, "Digits only please");
+</script>
+
 
 {% endblock content %}
