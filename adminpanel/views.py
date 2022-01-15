@@ -203,23 +203,23 @@ def editproduct(request):
         product.product_name = request.POST.get('productname',False)
         product.product_price = request.POST.get('price',False)
         product.product_stock = request.POST.get('stock',False)
-        images1 = request.POST.get('cropped_image1',False)
-        images2 = request.POST.get('cropped_image2',False)
-        images3 = request.POST.get('cropped_image3',False)
         product.offer_price = int(actual_price) - offer_price 
         product.product_description = request.POST.get('product_description',False)
         product.category_id = request.POST.get('cate')
         if len(request.FILES) != 0:
-            os.remove(product.product_img_1.path)
-            product.product_img_1 = images1
-        
+            if len(product.product_img1)> 0:
+                os.remove(product.product_img_1.path)
+            product.product_img_1 = request.FILES['cropped_image1']
         if len(request.FILES) != 0:
-            os.remove(product.product_img_2.path)
-            product.product_img_2 = images2
-        
+            if len(product.product_img2)> 0:
+                os.remove(product.product_img_1.path)
+            product.product_img_2 = request.FILES['cropped_image2']
         if len(request.FILES) != 0:
-            os.remove(product.product_img_3.path)
-            product.product_img_3 = images3
+            if len(product.product_img3)> 0:
+                os.remove(product.product_img_3.path)
+            product.product_img_3 = request.FILES['cropped_image3']
+        
+        
         product.save()
         return redirect(allproducts)
 
