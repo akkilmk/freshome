@@ -99,63 +99,65 @@
   
             <div class="float-end ">
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-rounded" onclick="return validateaddressForm()"
+              <button type="submit" class="btn btn-primary btn-rounded"
                 style="background-color: #0062CC ;">Update</button>
             </div>
-            <script>
-              $('#addressForm').validate({
-                rules: {
-              name: {
-                  required: true,
-                  minlength:3
-              },
-
-              city: {
-                  required: true,
-                  minlength:5
-              },
-
-              phone: {
-                  required: true,
-                  numbersonly:true,
-                  minlength: 10,
-                  maxlength:10,
-                  
-              },
-
-              zipcode: {
-                  required: true,
-                  numbersonly: true,
-                  minlength: 6,
-                  
-              },
-
-              address: {
-                  required: true,
-                  minlength:10
-              },
-          },
-          errorElement: 'span',
-          errorPlacement: function (error, element) {
-              error.addClass('invalid-feedback');
-              element.closest('.form-group').append(error);
-          },
-          highlight: function (element, errorClass, validClass) {
-              $(element).addClass('is-invalid');
-          },
-          unhighlight: function (element, errorClass, validClass) {
-              $(element).removeClass('is-invalid');
-          }
-              });
-              $(document).ready(function () {
-              $.validator.addMethod("numbersonly", function (value, element) {
-      return this.optional(element) || /^[0-9]+$/i.test(value);
-  }, "Digits only please");
-});
-            </script>
+           
      
           {% endif %}
           </form>
+          <script>
+            $(document).ready(function () {
+            $('#addressForm').validate({
+              rules: {
+            name: {
+                required: true,
+                minlength:3
+            },
+
+            city: {
+                required: true,
+                minlength:5
+            },
+
+            phone: {
+                required: true,
+                numbersonly:true,
+                minlength: 10,
+                maxlength:10,
+                
+            },
+
+            zipcode: {
+                required: true,
+                numbersonly: true,
+                minlength: 6,
+                
+            },
+
+            address: {
+                required: true,
+                minlength:10
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+            });
+            
+            $.validator.addMethod("numbersonly", function (value, element) {
+    return this.optional(element) || /^[0-9]+$/i.test(value);
+}, "Digits only please");
+});
+          </script>
         </div>
       </div>
     </div>
@@ -174,7 +176,7 @@
       const valid = $('#addressForm').validate({
           
       });
-      return valid;
+      
   }
 
   $.validator.addMethod("numbersonly", function (value, element) {
