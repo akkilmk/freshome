@@ -284,7 +284,7 @@
                         <!-- End Logo-offcanvas-menu -->
                         <!-- Search Bar -->
                         <div class="col d-none d-xl-block">
-                            <form action="/../../searching" method="post" id="addressForm" class="js-focus-state">
+                            <form action="/../../searching" method="post"  class="js-focus-state">
                                 {% csrf_token %}
                                 <label class="sr-only" for="searchproduct">Search</label>
                                 <div class="input-group">
@@ -582,7 +582,7 @@
             <h4 style="color: #495057 ;">Add Address</h4>
           </div>
   
-          <form class="mb-0" method="post">
+          <form class="mb-0" id="addressForm" method="post">
 
             {% csrf_token %}
   
