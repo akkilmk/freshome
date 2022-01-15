@@ -102,26 +102,9 @@
               <button type="submit" class="btn btn-primary btn-rounded" onclick="return validateaddressForm()"
                 style="background-color: #0062CC ;">Update</button>
             </div>
-     
-          {% endif %}
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!-- ************** -->
-
-
-<script>
-
-  $(document).ready(function () {
-      validateaddressForm()
-              })
-
-  function validateaddressForm() {
-      const valid = $('#addressForm').validate({
-          rules: {
+            <script>
+              $('#addressForm').validate({
+                rules: {
               name: {
                   required: true,
                   minlength:3
@@ -163,6 +146,33 @@
           unhighlight: function (element, errorClass, validClass) {
               $(element).removeClass('is-invalid');
           }
+              });
+              $(document).ready(function () {
+              $.validator.addMethod("numbersonly", function (value, element) {
+      return this.optional(element) || /^[0-9]+$/i.test(value);
+  }, "Digits only please");
+});
+            </script>
+     
+          {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ************** -->
+
+
+<script>
+
+  $(document).ready(function () {
+      validateaddressForm()
+              })
+
+  function validateaddressForm() {
+      const valid = $('#addressForm').validate({
+          
       });
       return valid;
   }
