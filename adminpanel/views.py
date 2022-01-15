@@ -203,23 +203,35 @@ def editproduct(request):
         product.product_name = request.POST.get('productname',False)
         product.product_price = request.POST.get('price',False)
         product.product_stock = request.POST.get('stock',False)
+        images1 = request.POST.get('cropped_image1',False)
+        images2 = request.POST.get('cropped_image2',False)
+        images3 = request.POST.get('cropped_image3',False)
+        product_name = request.POST.get('productname')
         product.offer_price = int(actual_price) - offer_price 
         product.product_description = request.POST.get('product_description',False)
         product.category_id = request.POST.get('cate')
+
+
         if len(request.FILES) != 0:
-            if len(product.product_img1)> 0:
-                os.remove(product.product_img_1.path)
-            product.product_img_1 = request.FILES['cropped_image1']
-        if len(request.FILES) != 0:
-            if len(product.product_img2)> 0:
-                os.remove(product.product_img_1.path)
-            product.product_img_2 = request.FILES['cropped_image2']
-        if len(request.FILES) != 0:
-            if len(product.product_img3)> 0:
-                os.remove(product.product_img_3.path)
-            product.product_img_3 = request.FILES['cropped_image3']
+            os.remove(product.product_img_1.path)
+            format, img1 = images1.split(';base64,')
+            ext = format.split('/')[-1]
+            product_image1 = ContentFile(base64.b64decode(img1), name= product_name + '1.' + ext)
+            product.product_img_1 = product_image1
         
+        if len(request.FILES) != 0:
+            os.remove(product.product_img_2.path)
+            format, img2 = images2.split(';base64,')
+            ext = format.split('/')[-1]
+            product_image2 = ContentFile(base64.b64decode(img2), name= product_name + '2.' + ext)
+            product.product_img_2 = product_image2
         
+        if len(request.FILES) != 0:
+            os.remove(product.product_img_3.path)
+            format, img3 = images3.split(';base64,')
+            ext = format.split('/')[-1]
+            product_image3 = ContentFile(base64.b64decode(img3), name= product_name + '3.' + ext)
+            product.product_img_3 = product_image3
         product.save()
         return redirect(allproducts)
 
