@@ -284,7 +284,7 @@
                         <!-- End Logo-offcanvas-menu -->
                         <!-- Search Bar -->
                         <div class="col d-none d-xl-block">
-                            <form action="/../../searching" method="post" class="js-focus-state">
+                            <form action="/../../searching" method="post" id="addressForm" class="js-focus-state">
                                 {% csrf_token %}
                                 <label class="sr-only" for="searchproduct">Search</label>
                                 <div class="input-group">
@@ -588,13 +588,13 @@
   
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example1" name="name"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example1">Name</label>
                 </div>
               </div>
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example2" name="city"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example2">City</label>
                 </div>
@@ -602,7 +602,7 @@
             </div>
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example3" name="phone" class="form-control input-custom" />
                   <label class="form-label"  for="form9Example3">phone</label>
                 </div>
@@ -616,7 +616,7 @@
             </div>
             <div class="row mb-4">
               <div class="col">
-                <div class="form-outline">
+                <div class="form-outline form-group">
                   <input type="text" id="form9Example6" name="address"  class="form-control input-custom" />
                   <label class="form-label" for="form9Example6">Address</label>
                 </div>
@@ -624,7 +624,7 @@
       
             <div class="float-end ">
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-rounded"
+              <button type="submit" class="btn btn-primary btn-rounded" onclick="return validateaddressForm()"
                 style="background-color: #0062CC ;">Add Address</button>
             </div>
   
@@ -822,7 +822,9 @@
 <script src="{% static 'assets/vendor/hs-megamenu/src/hs.megamenu.js' %}"></script>
 <script src="{% static 'assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 <script src="{% static 'assets/vendor/appear.js' %}"></script>
-<script src="{% static 'assets/vendor/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static 'assets/vendor/fancybox/jquery.fancybox.min.js' %}"></script>
 <script src="{% static 'assets/vendor/svg-injector/dist/svg-injector.min.js' %}"></script>
 <script src="{% static 'assets/vendor/typed.js/lib/typed.min.js' %}"></script>
@@ -947,6 +949,65 @@
       // initialization of select picker
       $.HSCore.components.HSSelectPicker.init('.js-select');
   });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        validateaddressForm()
+                })
+
+    function validateaddressForm() {
+        const valid = $('#addressForm').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength:3
+                },
+
+                city: {
+                    required: true,
+                    minlength:5
+                },
+
+                phone: {
+                    required: true,
+                    numbersonly:true,
+                    minlength: 10,
+                    maxlength:10,
+                    
+                },
+
+                zipcode: {
+                    required: true,
+                    numbersonly: true,
+                    minlength: 6,
+                    
+                },
+
+                address: {
+                    required: true,
+                    minlength:10
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+        return valid;
+    }
+
+    $.validator.addMethod("numbersonly", function (value, element) {
+        return this.optional(element) || /^[0-9]+$/i.test(value);
+    }, "Digits only please");
 </script>
 
 
