@@ -836,7 +836,7 @@
                     {% endfor %}
                     {% else %}
                     <!-- Billing Form -->
-                    <form action="/../accounts/addaddress" method="post">
+                    <form action="/../accounts/addaddress" id="addressForm" method="post">
                         {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
@@ -912,7 +912,7 @@
                             {% endif %}
                             <!-- End Input -->
                         </div>
-                        <button class="btn btn-primary-dark-w btn-block btn-pill font-size-15 mb-3 py-3">Add Address</button>
+                        <button class="btn btn-primary-dark-w btn-block btn-pill font-size-15 mb-3 py-3" onclick="return validateaddressForm()">Add Address</button>
                         </form>
                     {% endif %}
 
@@ -1419,6 +1419,54 @@
             // initialization of select picker
             $.HSCore.components.HSSelectPicker.init('.js-select');
         });
+    </script>
+    <script>
+
+        function validateaddressForm() {
+            const valid = $('#addressForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength:3
+                    },
+
+                    city: {
+                        required: true,
+                        minlength:5
+                    },
+
+                    phone: {
+                        required: true,
+                        minlength: 10,
+                        maxlength:10,
+                        numbersonly:true
+                    },
+
+                    zipcode: {
+                        required: true,
+                        minlength: 6,
+                        numbersonly: true
+                    },
+
+                    address: {
+                        required: true,
+                        minlength:10
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+            return valid;
+        }
     </script>
 
 
