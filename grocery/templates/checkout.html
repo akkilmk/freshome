@@ -841,7 +841,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Input -->
-                            <div class="js-form-message mb-6">
+                            <div class="js-form-message form-group mb-6">
                                 <label for="name" class="form-label">
                                     Full Name
                                     <span class="text-danger">*</span>
@@ -853,7 +853,7 @@
 
                         <div class="col-md-6">
                             <!-- Input -->
-                            <div class="js-form-message mb-6">
+                            <div class="js-form-message form-group mb-6">
                                 <label for="city" class="form-label">
                                     City
                                     <span class="text-danger">*</span>
@@ -867,7 +867,7 @@
 
                         <div class="col-md-6">
                             <!-- Input -->
-                            <div class="js-form-message mb-6">
+                            <div class="js-form-message form-group mb-6">
                                 <label for="phone" class="form-label">
                                     Phone
                                     <span class="text-danger">*</span>
@@ -881,7 +881,7 @@
                             <!-- Input -->
                             <div class="col-md-6">
                                 <!-- Input -->
-                                <div class="js-form-message mb-6">
+                                <div class="js-form-message form-group mb-6">
                                     <label for="zipcode" class="form-label">
                                         Zipcode
                                     </label>
@@ -894,7 +894,7 @@
 
                         <div class="col-md-12">
                             <!-- Input -->
-                            <div class="js-form-message mb-6">
+                            <div class="js-form-message form-group mb-6">
                                 <label for="address" class="form-label">
                                     Address
                                     <span class="text-danger">*</span>
@@ -912,7 +912,7 @@
                             {% endif %}
                             <!-- End Input -->
                         </div>
-                        <button class="btn btn-primary-dark-w btn-block btn-pill font-size-15 mb-3 py-3" onclick="return validateaddressForm()">Add Address</button>
+                        <button type="submit" class="btn btn-primary-dark-w btn-block btn-pill font-size-15 mb-3 py-3" onclick="return validateaddressForm()">Add Address</button>
                         </form>
                     {% endif %}
 
@@ -1461,7 +1461,7 @@ $(document).ready(function () {
                 errorElement: 'span',
                 errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
-                    element.closest('.js-form-message').append(error);
+                    element.closest('.form-group').append(error);
                 },
                 highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
