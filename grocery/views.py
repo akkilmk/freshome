@@ -463,7 +463,7 @@ def buynow(request):
                 order_id = order.objects.filter(user_id = user_id).latest('id')
                 order_details = orderitems.objects.filter(order_id = order_id)
                 return render(request,'success.html',{'order_details':order_details,'buynowtotal':cartsum,'user_name':user_name,'mycart_count':mycart_count})
-        address = Address.objects.filter(user_id = user_id)
+        address = Address.objects.filter(user_id = user_id ,is_active = 0)
         coupon_lists =  coupon_list()
         coupon_lists.grand_total = productdec.offer_price
         coupon_lists.user_id =user_id
