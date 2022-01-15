@@ -872,7 +872,7 @@
                                     Phone
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" id="phone" class="form-control" name="phone" placeholder="Enter your phone number" aria-label="Company Name" data-msg="Please enter a company name." data-error-class="u-has-error" data-success-class="u-has-success" >
+                                <input type="text" id="phone" class="form-control" name="phone" placeholder="Enter your phone number" aria-label="Company Name">
                             </div>
                             <!-- End Input -->
                         </div>
@@ -885,7 +885,7 @@
                                     <label for="zipcode" class="form-label">
                                         Zipcode
                                     </label>
-                                    <input type="text" id="zipcode" class="form-control" name="zipcode" placeholder="zipcode" aria-label="Company Name" data-msg="Please enter a company name." data-error-class="u-has-error" data-success-class="u-has-success" >
+                                    <input type="text" id="zipcode" class="form-control" name="zipcode" placeholder="zipcode" aria-label="Company Name" >
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -1472,6 +1472,10 @@ $(document).ready(function () {
             });
             return valid;
         }
+
+        $.validator.addMethod("numbersonly", function (value, element) {
+            return this.optional(element) || /^[0-9]+$/i.test(value);
+        }, "Digits only please");
     </script>
 
 
