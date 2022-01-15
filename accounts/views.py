@@ -226,7 +226,8 @@ def deleteadd(request):
     else:
         id = request.GET.get('id')
         add = Address.objects.get(id=id)
-        add.update(is_active = 1 )
+        add.is_active = 1
+        add.save()
         return redirect(profile)
 
 
