@@ -415,7 +415,7 @@ def checkout(request):
             
         else:
             cartdec = mycart.objects.filter(user_id=user_id) 
-            address = Address.objects.filter(user_id = user_id)
+            address = Address.objects.filter(user_id = user_id,is_active = 0)
             coupon_lists.cart_sum = cartsum
             coupon_lists.coupon_discount = 0
             coupon_lists.grand_total = total_sum

@@ -116,7 +116,7 @@ def profile(request):
         user_name=user_email.firstname
         userid = user_email.id
         mycart_count = mycart.objects.filter(user_id = userid).count()
-        useradd = Address.objects.filter(user_id = user_id).all()
+        useradd = Address.objects.filter(user_id = user_id,is_active = 0 ).all()
         order_details = order.objects.filter(user_id = user_id).order_by('-date')
         products_details = orderitems.objects.all()
        
@@ -225,7 +225,7 @@ def deleteadd(request):
         return redirect(userlogin)
     else:
         id = request.GET.get('id')
-        Address.objects.get(id=id).delete()
+        Address.objects.get(id=id).update(is_active =1)
         return redirect(profile)
 
 
