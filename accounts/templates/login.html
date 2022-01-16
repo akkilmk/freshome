@@ -7,13 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	{% if messages %}
-    {% for messages in messages %}
-    <script>
-        swal("Hello User", "...{{messages}}");
-    </script>
-    {% endfor %}
-    {% endif %}
+	
 
 
 	<style>
@@ -127,6 +121,12 @@
 			</div>
 		</div>
 	</div>
+	{% if messages %}
+    {% for messages in messages %}
+    <script>
+        swal("Hello User", "...{{messages}}");
+    </script>
+    {% endfor %}
+    {% endif %}
 </body>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 </html>
