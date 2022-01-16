@@ -10,7 +10,7 @@
 	{% if messages %}
     {% for messages in messages %}
     <script>
-        swal("Hello User", "...Your are must login first");
+        swal("Hello User", "...{{messages}}");
     </script>
     {% endfor %}
     {% endif %}
