@@ -364,10 +364,7 @@ def checkout(request):
         user_id=user_email.id
         coupon_lists =  coupon_list()
         cart_sum = mycart.objects.filter(user_id=user_id).aggregate(Sum('total'))
-        caa = list(cart_sum.values())
-        for i in caa:
-            total_sum = i
-            print(total_sum)
+        total_sum = cart_sum.get('total__sum')
         if total_sum == 0:
             messages.info(request,'Please add cart least one product')
             return redirect(mycarts)
