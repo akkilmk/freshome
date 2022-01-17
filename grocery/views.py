@@ -367,12 +367,11 @@ def checkout(request):
         caa = list(cart_sum.values())
         for i in caa:
             total_sum = i
+            print(total_sum)
         if total_sum == 0:
             messages.info(request,'Please add cart least one product')
             return redirect(mycarts)
         else:
-
-
             mycart.objects.filter(user_id=user_id).update(grand_total = total_sum)
             lastest_cart= mycart.objects.filter(user_id = user_id).latest('coupon_discount')
             lastest=lastest_cart.coupon_discount
