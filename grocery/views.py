@@ -365,7 +365,7 @@ def checkout(request):
         coupon_lists =  coupon_list()
         cart_sum = mycart.objects.filter(user_id=user_id).aggregate(Sum('total'))
         total_sum = cart_sum.get('total__sum')
-        if total_sum == 0:
+        if total_sum is None:
             messages.info(request,'Please add cart least one product')
             return redirect(mycarts)
         else:
