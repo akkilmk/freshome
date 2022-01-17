@@ -367,62 +367,68 @@ def checkout(request):
         caa = list(cart_sum.values())
         for i in caa:
             total_sum = i
-        mycart.objects.filter(user_id=user_id).update(grand_total = total_sum)
-        lastest_cart= mycart.objects.filter(user_id = user_id).latest('coupon_discount')
-        lastest=lastest_cart.coupon_discount
-        grand_total = lastest_cart.grand_total
-        cartsum = int(grand_total) - float(lastest)
-        user_name=user_email.firstname
-        mycart_count = mycart.objects.filter(user_id = user_id).count()
-        
-        if request.method =='POST':
-            address = request.POST.get('active_add')
-            if address is None:
-                messages.info(request,'please fill the Address form')
-                return redirect(checkout)
-            else:
-                total = request.POST.get('total_amt')
-                cod = request.POST.get('payment')
-                offer_details = coupon_list.objects.latest('id')
-                orders = order()
-                orders.user_id = user_id
-                orders.address_id = address
-                orders.total = offer_details.grand_total
-                orders.payment_mode =cod
-                orders.save()
-                mycarts = mycart.objects.filter(user_id = user_id).all()
-                last_id = order.objects.filter(user_id = user_id).latest('id')
-                for i in mycarts:
-                    order_items = orderitems()
-                    order_items.order_id = last_id.id
-                    order_items.products_id = i.products_id
-                    order_items.quantity = i.quantity
-                    order_items.price = i.total
-                    order_items.save()
-                    product_id = i.products_id
-                    product_dec = products.objects.get(id  = product_id)
-                    product_dec.product_stock = product_dec.product_stock - i.quantity
-                    product_dec.save()
-                    mycarts = mycart.objects.filter(user_id = user_id).delete()
-                coupon_last =  coupon_list.objects.filter(user_id = user_id).last()
-                order_id = order.objects.filter(user_id = user_id).latest('id')
-                order_details = orderitems.objects.filter(order_id = order_id)
-                coupon_lists.status = 0
-                coupon_lists.user_id = user_id
-                coupon_lists.coupon_use_id = coupon_last.coupon_use_id
-                coupon_lists.save()
-                return render(request,'success.html',{'order_details':order_details,'subtotal':cartsum,'user_name':user_name,'mycart_count':mycart_count})
-            
+        if total_sum == 0:
+            messages.info(request,'Please add cart least one product')
+            return redirect(mycarts)
         else:
-            cartdec = mycart.objects.filter(user_id=user_id) 
-            address = Address.objects.filter(user_id = user_id,is_active = 0)
-            coupon_lists.cart_sum = cartsum
-            coupon_lists.coupon_discount = 0
-            coupon_lists.grand_total = total_sum
-            coupon_lists.user_id = user_id
-            coupon_lists.save()
-            return render(request,'checkout.html',{'cartdetails': cartdec,'lastest_coupon':lastest,'subtotal':cartsum ,'grand_total':grand_total,
-            'address':address,'user_name':user_name,'mycart_count':mycart_count})
+
+
+            mycart.objects.filter(user_id=user_id).update(grand_total = total_sum)
+            lastest_cart= mycart.objects.filter(user_id = user_id).latest('coupon_discount')
+            lastest=lastest_cart.coupon_discount
+            grand_total = lastest_cart.grand_total
+            cartsum = int(grand_total) - float(lastest)
+            user_name=user_email.firstname
+            mycart_count = mycart.objects.filter(user_id = user_id).count()
+            
+            if request.method =='POST':
+                address = request.POST.get('active_add')
+                if address is None:
+                    messages.info(request,'please fill the Address form')
+                    return redirect(checkout)
+                else:
+                    total = request.POST.get('total_amt')
+                    cod = request.POST.get('payment')
+                    offer_details = coupon_list.objects.latest('id')
+                    orders = order()
+                    orders.user_id = user_id
+                    orders.address_id = address
+                    orders.total = offer_details.grand_total
+                    orders.payment_mode =cod
+                    orders.save()
+                    mycarts_items = mycart.objects.filter(user_id = user_id).all()
+                    last_id = order.objects.filter(user_id = user_id).latest('id')
+                    for i in mycarts_items:
+                        order_items = orderitems()
+                        order_items.order_id = last_id.id
+                        order_items.products_id = i.products_id
+                        order_items.quantity = i.quantity
+                        order_items.price = i.total
+                        order_items.save()
+                        product_id = i.products_id
+                        product_dec = products.objects.get(id  = product_id)
+                        product_dec.product_stock = product_dec.product_stock - i.quantity
+                        product_dec.save()
+                        mycart.objects.filter(user_id = user_id).delete()
+                    coupon_last =  coupon_list.objects.filter(user_id = user_id).last()
+                    order_id = order.objects.filter(user_id = user_id).latest('id')
+                    order_details = orderitems.objects.filter(order_id = order_id)
+                    coupon_lists.status = 0
+                    coupon_lists.user_id = user_id
+                    coupon_lists.coupon_use_id = coupon_last.coupon_use_id
+                    coupon_lists.save()
+                    return render(request,'success.html',{'order_details':order_details,'subtotal':cartsum,'user_name':user_name,'mycart_count':mycart_count})
+                
+            else:
+                cartdec = mycart.objects.filter(user_id=user_id) 
+                address = Address.objects.filter(user_id = user_id,is_active = 0)
+                coupon_lists.cart_sum = cartsum
+                coupon_lists.coupon_discount = 0
+                coupon_lists.grand_total = total_sum
+                coupon_lists.user_id = user_id
+                coupon_lists.save()
+                return render(request,'checkout.html',{'cartdetails': cartdec,'lastest_coupon':lastest,'subtotal':cartsum ,'grand_total':grand_total,
+                'address':address,'user_name':user_name,'mycart_count':mycart_count})
     
                     #buy now option and success page
 

@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{% static 'assets/vendor/fancybox/jquery.fancybox.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/slick-carousel/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
 </head>
@@ -1186,7 +1186,13 @@
             $.HSCore.components.HSSelectPicker.init('.js-select');
         });
     </script>
-
+    {% if messages %}
+    {% for messages in messages %}
+    <script>
+        swal("Hello User", "...{{messages}}");
+    </script>
+    {% endfor %}
+    {% endif %}
 
 </body>
 
