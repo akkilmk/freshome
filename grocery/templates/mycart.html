@@ -871,6 +871,14 @@
         })
     </script>
 
+    {% if messages %}
+    {% for messages in messages %}
+    <script>
+        swal("Hello User", "...{{messages}}");
+    </script>
+    {% endfor %}
+    {% endif %}
+
     <!-- ###################STARTFOOTER################### -->
 
     <footer>
@@ -1186,13 +1194,7 @@
             $.HSCore.components.HSSelectPicker.init('.js-select');
         });
     </script>
-    {% if messages %}
-    {% for messages in messages %}
-    <script>
-        swal("Hello User", "...{{messages}}");
-    </script>
-    {% endfor %}
-    {% endif %}
+    
 
 </body>
 
